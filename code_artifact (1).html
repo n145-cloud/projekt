@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="ru" class="scroll-smooth" data-theme="nebula">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Исабек Нұрасыл ® — Разработчик Сайтов, ИИ-Видео и Дизайна</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Playfair Display, Syne, Plus Jakarta Sans, Orbitron -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;800;900&family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* Cosmic & Aesthetic Design Tokens */
+        :root[data-theme="nebula"] {
+            --hero-bg: #090a16;
+            --hero-accent: #a855f7;
+            --hero-btn: #8b5cf6;
+            --hero-btn-hover: #7c3aed;
+            --hero-text-accent: #c084fc;
+            --card-bg: rgba(18, 16, 38, 0.7);
+            --card-border: rgba(168, 85, 247, 0.2);
+            --light-bg: #0d0f22;
+            --text-main: #f1f5f9;
+            --text-sub: #94a3b8;
+            --glow-color: rgba(168, 85, 247, 0.35);
+        }
+
+        :root[data-theme="green"] {
+            --hero-bg: #111a17;
+            --hero-accent: #a3be4c;
+            --hero-btn: #8ba535;
+            --hero-btn-hover: #738b28;
+            --hero-text-accent: #b8d458;
+            --card-bg: rgba(22, 33, 29, 0.85);
+            --card-border: rgba(163, 190, 76, 0.25);
+            --light-bg: #15221d;
+            --text-main: #f4f7f2;
+            --text-sub: #9eb1a6;
+            --glow-color: rgba(163, 190, 76, 0.3);
+        }
+
+        :root[data-theme="solar"] {
+            --hero-bg: #1a0a05;
+            --hero-accent: #f97316;
+            --hero-btn: #ea580c;
+            --hero-btn-hover: #c2410c;
+            --hero-text-accent: #fb923c;
+            --card-bg: rgba(36, 16, 10, 0.85);
+            --card-border: rgba(249, 115, 22, 0.25);
+            --light-bg: #210d07;
+            --text-main: #fff7ed;
+            --text-sub: #fdba74;
+            --glow-color: rgba(249, 115, 22, 0.35);
+        }
+
+        :root[data-theme="void"] {
+            --hero-bg: #030712;
+            --hero-accent: #06b6d4;
+            --hero-btn: #0891b2;
+            --hero-btn-hover: #0e7490;
+            --hero-text-accent: #22d3ee;
+            --card-bg: rgba(15, 23, 42, 0.8);
+            --card-border: rgba(6, 182, 212, 0.25);
+            --light-bg: #080e1a;
+            --text-main: #f8fafc;
+            --text-sub: #94a3b8;
+            --glow-color: rgba(6, 182, 212, 0.35);
+        }
+
+        body {
+            background-color: var(--light-bg);
+            color: var(--text-main);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            overflow-x: hidden;
+            transition: background-color 0.5s ease, color 0.5s ease;
+        }
+
+        .font-serif-title {
+            font-family: 'Playfair Display', serif;
+        }
+
+        .font-syne {
+            font-family: 'Syne', sans-serif;
+        }
+
+        .font-orbitron {
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        /* Hero Curved Curve */
+        .hero-section {
+            background-color: var(--hero-bg);
+            transition: background-color 0.5s ease;
+        }
+
+        .hero-curved-bottom {
+            border-bottom-left-radius: 40px;
+            border-bottom-right-radius: 40px;
+        }
+
+        @media (min-width: 768px) {
+            .hero-curved-bottom {
+                border-bottom-left-radius: 70px;
+                border-bottom-right-radius: 70px;
+            }
+        }
+
+        /* Buttons & Glassmorphic Elements */
+        .btn-accent {
+            background-color: var(--hero-btn);
+            color: #ffffff;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: 0 4px 20px var(--glow-color);
+        }
+
+        .btn-accent:hover {
+            background-color: var(--hero-btn-hover);
+            transform: translateY(-2px) scale(1.02);
+            box-shadow: 0 10px 30px var(--glow-color);
+        }
+
+        .text-accent-custom {
+            color: var(--hero-text-accent);
+        }
+
+        .glass-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            backdrop-filter: blur(16px);
+            border-radius: 24px;
+            transition: all 0.4s ease;
+        }
+
+        .glass-card:hover {
+            border-color: var(--hero-accent);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 35px var(--glow-color);
+        }
+
+        /* Emerging Glow Animation */
+        .glow-reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            filter: blur(12px);
+            transition: all 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .glow-reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+            filter: blur(0);
+        }
+
+        /* Canvas Overlay */
+        #starfieldCanvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #030712;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--hero-btn);
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-purple-600 selection:text-white relative">
+
+    <!-- Background Space Starfield Canvas -->
+    <canvas id="starfieldCanvas"></canvas>
+
+    <!-- MAIN HERO SECTION WITH CURVED DESIGN -->
+    <div class="hero-section hero-curved-bottom text-white relative overflow-hidden transition-all duration-500 pb-20 pt-6 px-4 sm:px-8 z-10">
+        
+        <!-- HEADER & NAVIGATION WITH ULTRA-DETAILED STYLE SWITCHER -->
+        <header class="max-w-7xl mx-auto flex items-center justify-between pb-10 pt-2 border-b border-white/10 relative z-20">
+            <!-- Brand / Logo -->
+            <a href="#" class="font-syne text-2xl font-bold tracking-tight flex items-center gap-2 group">
+                <div class="w-9 h-9 rounded-xl bg-white/10 flex items-center justify-center border border-white/20 group-hover:scale-110 transition-transform">
+                    <i class="fa-solid fa-atom text-accent-custom text-lg"></i>
+                </div>
+                <span>Исабек Нұрасыл</span>
+                <span class="text-[10px] text-accent-custom border border-white/20 rounded-full px-2 py-0.5 font-orbitron">3.0</span>
+            </a>
+
+            <!-- Navigation Links -->
+            <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-gray-300">
+                <a href="#about" class="hover:text-white transition-colors">Обо мне</a>
+                <a href="#services" class="hover:text-white transition-colors">Услуги & Цены</a>
+                <a href="#projects" class="hover:text-white transition-colors">Проекты (Покупки)</a>
+                <a href="#calculator" class="hover:text-white transition-colors">Калькулятор</a>
+            </nav>
+
+            <!-- Right Side Controls: Style Switcher & CTA -->
+            <div class="flex items-center gap-4">
+                <!-- Cosmic Style Switcher -->
+                <div class="relative">
+                    <select id="themeSelect" onchange="changeTheme(this.value)" class="bg-white/10 hover:bg-white/20 text-xs text-white border border-white/20 px-3 py-2 rounded-full focus:outline-none cursor-pointer backdrop-blur-md transition-all">
+                        <option value="nebula" class="text-black">🌌 Космическая Туманность</option>
+                        <option value="green" class="text-black">🟢 Фисташковый Элеганс</option>
+                        <option value="solar" class="text-black">🔥 Огненный Киберпанк</option>
+                        <option value="void" class="text-black">⚡ Неоновый Космос</option>
+                    </select>
+                </div>
+
+                <!-- CTA Button -->
+                <button onclick="openModal('Прямое обращение')" class="btn-accent px-5 py-2.5 rounded-full text-sm font-semibold flex items-center gap-2">
+                    <span>Связаться</span>
+                    <i class="fa-solid fa-paper-plane text-xs"></i>
+                </button>
+            </div>
+        </header>
+
+        <!-- Main Hero Body Layout -->
+        <div class="max-w-7xl mx-auto pt-16 pb-12 relative z-10">
+            
+            <div class="grid lg:grid-cols-12 gap-10 items-center">
+                
+                <!-- Hero Left Column Title & Intro -->
+                <div class="lg:col-span-8 space-y-6">
+                    <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs text-accent-custom font-orbitron">
+                        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+                        Принимаю заказы на сайты и ИИ-видео
+                    </div>
+                    
+                    <p class="font-serif-title italic text-2xl sm:text-3xl text-accent-custom">
+                        Создатель премиальных сайтов & AI медиа
+                    </p>
+                    
+                    <h1 class="font-syne text-5xl sm:text-7xl xl:text-8xl font-extrabold text-white leading-[0.98] tracking-tight">
+                        Архитектура <br>
+                        Сайтов & ИИ-Видео
+                    </h1>
+                </div>
+
+                <!-- Hero Right Column Quote & Statement -->
+                <div class="lg:col-span-4 space-y-6 lg:pl-6 border-l lg:border-white/15 border-t lg:border-t-0 pt-6 lg:pt-0 border-white/10">
+                    <p class="font-serif-title text-xl sm:text-2xl text-gray-200 leading-relaxed">
+                        «Прекрасный веб-дизайн и технологии открывают новые горизонты для продаж.»
+                    </p>
+                    <p class="text-sm text-gray-400 leading-relaxed">
+                        Я — **Исабек Нұрасыл**. Создаю продающие сайты, платформы для обучения, бизнес-сервисы и ролики с ИИ за деньги. Высокая эстетика, скорость и качество.
+                    </p>
+                </div>
+
+            </div>
+
+            <!-- Numbered Highlights Grid Bar (#01 - #04) -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 pt-16 mt-12 border-t border-white/10">
+                <div class="space-y-1 bg-white/5 p-4 rounded-2xl border border-white/5">
+                    <span class="text-accent-custom font-orbitron font-bold text-xs">#01</span>
+                    <h4 class="font-semibold text-white text-base">Сайты для Продаж</h4>
+                    <p class="text-xs text-gray-400">от 60 000 ₸ <span class="text-accent-custom text-[10px] block">*цена договорная</span></p>
+                </div>
+                <div class="space-y-1 bg-white/5 p-4 rounded-2xl border border-white/5">
+                    <span class="text-accent-custom font-orbitron font-bold text-xs">#02</span>
+                    <h4 class="font-semibold text-white text-base">Сайты для Уроков</h4>
+                    <p class="text-xs text-gray-400">от 50 000 ₸ <span class="text-accent-custom text-[10px] block">*цена договорная</span></p>
+                </div>
+                <div class="space-y-1 bg-white/5 p-4 rounded-2xl border border-white/5">
+                    <span class="text-accent-custom font-orbitron font-bold text-xs">#03</span>
+                    <h4 class="font-semibold text-white text-base">Сайты для Работы</h4>
+                    <p class="text-xs text-gray-400">от 70 000 ₸ <span class="text-accent-custom text-[10px] block">*цена договорная</span></p>
+                </div>
+                <div class="space-y-1 bg-white/5 p-4 rounded-2xl border border-white/5">
+                    <span class="text-accent-custom font-orbitron font-bold text-xs">#04</span>
+                    <h4 class="font-semibold text-white text-base">ИИ-Видео & Дизайн</h4>
+                    <p class="text-xs text-gray-400">от 30 000 ₸ <span class="text-accent-custom text-[10px] block">*цена договорная</span></p>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- TRUST BAR -->
+    <section class="py-10 border-b border-white/5 relative z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-8 flex flex-col md:flex-row items-center justify-between gap-6 text-gray-400 text-sm font-medium">
+            <span class="uppercase tracking-widest text-xs font-semibold text-gray-500 font-orbitron">Клиентский уровень & Партнеры:</span>
+            <div class="flex flex-wrap items-center gap-8 sm:gap-12 opacity-80">
+                <span class="font-syne font-bold text-lg tracking-wider text-white flex items-center gap-2"><i class="fa-solid fa-cube text-accent-custom text-xs"></i> Supa Blox</span>
+                <span class="font-syne font-bold text-lg tracking-wider text-white flex items-center gap-2"><i class="fa-solid fa-hourglass-start text-accent-custom text-xs"></i> Hype Blox</span>
+                <span class="font-syne font-bold text-lg tracking-wider text-white flex items-center gap-2"><i class="fa-solid fa-layer-group text-accent-custom text-xs"></i> Frame Blox</span>
+                <span class="font-syne font-bold text-lg tracking-wider text-white flex items-center gap-2"><i class="fa-solid fa-atom text-accent-custom text-xs"></i> Ultra Blox</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- ABOUT SECTION WITH EMERGING GLOWING TEXT -->
+    <section id="about" class="py-24 px-4 sm:px-8 max-w-7xl mx-auto relative z-10">
+        <div class="grid lg:grid-cols-12 gap-12 items-start">
+            
+            <div class="lg:col-span-5 space-y-6">
+                <span class="text-accent-custom font-semibold text-xs tracking-widest uppercase block font-orbitron">Космическая Архитектура</span>
+                <h2 class="font-serif-title text-4xl sm:text-5xl text-white leading-tight">
+                    Создаю цифровые решения, решающие задачи бизнеса
+                </h2>
+                <p class="text-gray-400 text-base leading-relaxed">
+                    Я **Исабек Нұрасыл**. Мой профиль — это разработка уникальных веб-сайтов любой сложности и генерация рекламного видеоконтента с искусственным интеллектом.
+                </p>
+                <div class="p-4 rounded-2xl bg-white/5 border border-white/10 text-xs text-gray-300 leading-relaxed">
+                    <i class="fa-solid fa-circle-info text-accent-custom mr-1.5"></i>
+                    **Обратите внимание:** Итоговая цена любого проекта не является фиксированной и обсуждается индивидуально в зависимости от объема, сроков и сложности функционала.
+                </div>
+            </div>
+
+            <!-- Glowing Emerging Text Cards -->
+            <div class="lg:col-span-7 space-y-6">
+                <div class="glow-reveal glass-card p-8 space-y-3">
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs font-bold uppercase tracking-wider text-accent-custom font-orbitron">01 / Продажи</span>
+                        <span class="text-xs bg-emerald-500/20 text-emerald-400 px-3 py-1 rounded-full font-semibold">Успешно реализовано</span>
+                    </div>
+                    <h3 class="font-syne text-2xl font-bold text-white">Сайты для Продаж и Конверсии</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">
+                        Быстрые, продающие лендинги с индивидуальным дизайном, формой заявок и приемом оплаты. 
+                    </p>
+                </div>
+
+                <div class="glow-reveal glass-card p-8 space-y-3">
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs font-bold uppercase tracking-wider text-accent-custom font-orbitron">02 / Образование</span>
+                        <span class="text-xs bg-emerald-500/20 text-emerald-400 px-3 py-1 rounded-full font-semibold">Успешно реализовано</span>
+                    </div>
+                    <h3 class="font-syne text-2xl font-bold text-white">Платформы для Уроков и Курсов</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">
+                        Удобные платформы для размещения онлайн-уроков, домашних заданий и обучающих видео.
+                    </p>
+                </div>
+
+                <div class="glow-reveal glass-card p-8 space-y-3">
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs font-bold uppercase tracking-wider text-accent-custom font-orbitron">03 / Бизнес</span>
+                        <span class="text-xs bg-emerald-500/20 text-emerald-400 px-3 py-1 rounded-full font-semibold">Успешно реализовано</span>
+                    </div>
+                    <h3 class="font-syne text-2xl font-bold text-white">Сайты для Работы и Сервисов</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">
+                        Многофункциональные корпоративные сайты для автоматизации рабочих процессов вашего бизнеса.
+                    </p>
+                </div>
+
+                <div class="glow-reveal glass-card p-8 space-y-3">
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs font-bold uppercase tracking-wider text-accent-custom font-orbitron">04 / Нейросети</span>
+                        <span class="text-xs bg-emerald-500/20 text-emerald-400 px-3 py-1 rounded-full font-semibold">Успешно реализовано</span>
+                    </div>
+                    <h3 class="font-syne text-2xl font-bold text-white">Генерация ИИ-Видео и Графика</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">
+                        Сверхдетализированные видеоролики и промо-материалы, сгенерированные передовыми ИИ.
+                    </p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- SERVICES SECTION WITH FLEXIBLE PRICING DISCLAIMERS -->
+    <section id="services" class="py-24 px-4 sm:px-8 border-y border-white/10 relative z-10 bg-black/20 backdrop-blur-md">
+        <div class="max-w-7xl mx-auto space-y-12">
+            
+            <div class="flex flex-col md:flex-row md:items-end justify-between gap-6">
+                <div>
+                    <span class="text-xs font-bold uppercase tracking-widest text-accent-custom font-orbitron block mb-2">Услуги & Прайс-Лист</span>
+                    <h2 class="font-serif-title text-4xl sm:text-5xl text-white">Что я создаю на заказ</h2>
+                </div>
+                <div class="text-right">
+                    <p class="text-xs text-amber-400 font-semibold bg-amber-500/10 border border-amber-500/20 px-4 py-2 rounded-2xl max-w-md">
+                        <i class="fa-solid fa-handshake mr-1"></i> Цены указаны от базового уровня. Окончательная стоимость обсуждается индивидуально в зависимости от масштаба и сложности вашего проекта.
+                    </p>
+                </div>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                
+                <!-- Service 1 -->
+                <div class="glass-card p-8 flex flex-col justify-between group">
+                    <div class="space-y-4">
+                        <span class="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-accent-custom font-bold text-lg font-orbitron group-hover:scale-110 transition-transform">
+                            01
+                        </span>
+                        <h3 class="font-syne text-2xl font-bold text-white">Сайт для Продаж</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed">
+                            Высококонверсионный продающий лендинг с интеграцией приема заявок и стильным дизайном.
+                        </p>
+                    </div>
+                    <div class="pt-8 mt-6 border-t border-white/10 space-y-3">
+                        <div class="flex items-center justify-between">
+                            <span class="font-syne text-xl font-bold text-white">от 60 000 ₸</span>
+                            <button onclick="openModal('Сайт для продаж')" class="w-9 h-9 rounded-full bg-white/10 hover:bg-white text-white hover:text-black flex items-center justify-center transition-all">
+                                <i class="fa-solid fa-arrow-right text-xs"></i>
+                            </button>
+                        </div>
+                        <span class="text-[11px] text-gray-400 block italic leading-tight">
+                            *Цена договорная в зависимости от крупности проекта
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Service 2 -->
+                <div class="glass-card p-8 flex flex-col justify-between group">
+                    <div class="space-y-4">
+                        <span class="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-accent-custom font-bold text-lg font-orbitron group-hover:scale-110 transition-transform">
+                            02
+                        </span>
+                        <h3 class="font-syne text-2xl font-bold text-white">Сайт для Уроков</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed">
+                            Платформа для обучающих курсов, видеозанятий и инфопродуктов.
+                        </p>
+                    </div>
+                    <div class="pt-8 mt-6 border-t border-white/10 space-y-3">
+                        <div class="flex items-center justify-between">
+                            <span class="font-syne text-xl font-bold text-white">от 50 000 ₸</span>
+                            <button onclick="openModal('Сайт для уроков')" class="w-9 h-9 rounded-full bg-white/10 hover:bg-white text-white hover:text-black flex items-center justify-center transition-all">
+                                <i class="fa-solid fa-arrow-right text-xs"></i>
+                            </button>
+                        </div>
+                        <span class="text-[11px] text-gray-400 block italic leading-tight">
+                            *Цена договорная в зависимости от крупности проекта
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Service 3 -->
+                <div class="glass-card p-8 flex flex-col justify-between group">
+                    <div class="space-y-4">
+                        <span class="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-accent-custom font-bold text-lg font-orbitron group-hover:scale-110 transition-transform">
+                            03
+                        </span>
+                        <h3 class="font-syne text-2xl font-bold text-white">Сайт для Работы</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed">
+                            Функциональный сайт для ведения бизнеса, корпоративного сервиса или компании.
+                        </p>
+                    </div>
+                    <div class="pt-8 mt-6 border-t border-white/10 space-y-3">
+                        <div class="flex items-center justify-between">
+                            <span class="font-syne text-xl font-bold text-white">от 70 000 ₸</span>
+                            <button onclick="openModal('Сайт для работы')" class="w-9 h-9 rounded-full bg-white/10 hover:bg-white text-white hover:text-black flex items-center justify-center transition-all">
+                                <i class="fa-solid fa-arrow-right text-xs"></i>
+                            </button>
+                        </div>
+                        <span class="text-[11px] text-gray-400 block italic leading-tight">
+                            *Цена договорная в зависимости от крупности проекта
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Service 4 -->
+                <div class="glass-card p-8 flex flex-col justify-between group">
+                    <div class="space-y-4">
+                        <span class="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-accent-custom font-bold text-lg font-orbitron group-hover:scale-110 transition-transform">
+                            04
+                        </span>
+                        <h3 class="font-syne text-2xl font-bold text-white">ИИ-Видео & Дизайн</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed">
+                            Создание качественного видео с помощью искусственного интеллекта и графический дизайн.
+                        </p>
+                    </div>
+                    <div class="pt-8 mt-6 border-t border-white/10 space-y-3">
+                        <div class="flex items-center justify-between">
+                            <span class="font-syne text-xl font-bold text-white">от 30 000 ₸</span>
+                            <button onclick="openModal('ИИ-Видео и Дизайн')" class="w-9 h-9 rounded-full bg-white/10 hover:bg-white text-white hover:text-black flex items-center justify-center transition-all">
+                                <i class="fa-solid fa-arrow-right text-xs"></i>
+                            </button>
+                        </div>
+                        <span class="text-[11px] text-gray-400 block italic leading-tight">
+                            *Цена договорная в зависимости от крупности проекта
+                        </span>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- PORTFOLIO SECTION WITH PURCHASE COUNTERS ("КУПЛЕНО 3 РАЗА") -->
+    <section id="projects" class="py-24 px-4 sm:px-8 max-w-7xl mx-auto relative z-10">
+        <div class="space-y-12">
+            <div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+                <div>
+                    <span class="text-xs font-bold uppercase tracking-widest text-accent-custom font-orbitron block mb-2">Избранное Портфолио</span>
+                    <h2 class="font-serif-title text-4xl sm:text-5xl text-white">Выполненные Проекты</h2>
+                </div>
+                <p class="text-xs text-gray-400">
+                    <i class="fa-solid fa-bag-shopping text-emerald-400 mr-1"></i> Популярные готовые решения с подтвержденными покупками
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                
+                <!-- Project Card 1 -->
+                <div class="glass-card overflow-hidden group space-y-4 p-5">
+                    <div class="aspect-[4/3] rounded-2xl overflow-hidden relative">
+                        <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=800&q=80" alt="Сайт для продаж" class="w-full h-full object-cover group-hover:scale-105 transition duration-700">
+                        <div class="absolute top-3 right-3 bg-black/80 backdrop-blur-md border border-emerald-500/40 text-emerald-400 text-xs px-3 py-1.5 rounded-full font-bold flex items-center gap-1.5 shadow-lg">
+                            <i class="fa-solid fa-cart-check"></i>
+                            <span>Куплено 3 раза</span>
+                        </div>
+                    </div>
+                    <div class="space-y-2">
+                        <div class="flex justify-between items-center text-xs">
+                            <span class="text-accent-custom font-orbitron font-semibold uppercase">Сайт для продаж</span>
+                            <span class="text-white font-bold">от 60 000 ₸</span>
+                        </div>
+                        <h3 class="font-syne text-2xl font-bold text-white">Космический Промо-Лендинг</h3>
+                        <p class="text-xs text-gray-400">Адаптивный дизайн, анимации и интеграция оплаты заявки.</p>
+                        <p class="text-[11px] text-amber-400/90 italic pt-1">
+                            *Можно договориться о цене в зависимости от крупности вашего проекта
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Project Card 2 -->
+                <div class="glass-card overflow-hidden group space-y-4 p-5">
+                    <div class="aspect-[4/3] rounded-2xl overflow-hidden relative">
+                        <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80" alt="Сайт для уроков" class="w-full h-full object-cover group-hover:scale-105 transition duration-700">
+                        <div class="absolute top-3 right-3 bg-black/80 backdrop-blur-md border border-emerald-500/40 text-emerald-400 text-xs px-3 py-1.5 rounded-full font-bold flex items-center gap-1.5 shadow-lg">
+                            <i class="fa-solid fa-cart-check"></i>
+                            <span>Куплено 3 раза</span>
+                        </div>
+                    </div>
+                    <div class="space-y-2">
+                        <div class="flex justify-between items-center text-xs">
+                            <span class="text-accent-custom font-orbitron font-semibold uppercase">Сайт для уроков</span>
+                            <span class="text-white font-bold">от 50 000 ₸</span>
+                        </div>
+                        <h3 class="font-syne text-2xl font-bold text-white">Платформа Онлайн-Курсов</h3>
+                        <p class="text-xs text-gray-400">Удобный кабинет для размещения видеоуроков и заданий.</p>
+                        <p class="text-[11px] text-amber-400/90 italic pt-1">
+                            *Можно договориться о цене в зависимости от крупности вашего проекта
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Project Card 3 -->
+                <div class="glass-card overflow-hidden group space-y-4 p-5">
+                    <div class="aspect-[4/3] rounded-2xl overflow-hidden relative">
+                        <img src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=800&q=80" alt="Сайт для работы" class="w-full h-full object-cover group-hover:scale-105 transition duration-700">
+                        <div class="absolute top-3 right-3 bg-black/80 backdrop-blur-md border border-emerald-500/40 text-emerald-400 text-xs px-3 py-1.5 rounded-full font-bold flex items-center gap-1.5 shadow-lg">
+                            <i class="fa-solid fa-cart-check"></i>
+                            <span>Куплено 3 раза</span>
+                        </div>
+                    </div>
+                    <div class="space-y-2">
+                        <div class="flex justify-between items-center text-xs">
+                            <span class="text-accent-custom font-orbitron font-semibold uppercase">Сайт для работы</span>
+                            <span class="text-white font-bold">от 70 000 ₸</span>
+                        </div>
+                        <h3 class="font-syne text-2xl font-bold text-white">Корпоративный Бизнес-Портал</h3>
+                        <p class="text-xs text-gray-400">Современная платформа для управления задачами бизнеса.</p>
+                        <p class="text-[11px] text-amber-400/90 italic pt-1">
+                            *Можно договориться о цене в зависимости от крупности вашего проекта
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- INTERACTIVE PROJECT CALCULATOR SECTION IN TENGE (₸) -->
+    <section id="calculator" class="py-24 px-4 sm:px-8 border-t border-white/10 relative z-10">
+        <div class="max-w-4xl mx-auto glass-card p-8 sm:p-12 space-y-8 shadow-2xl">
+            <div class="space-y-2">
+                <span class="text-xs font-bold uppercase tracking-widest text-accent-custom font-orbitron">Онлайн Расчет</span>
+                <h2 class="font-serif-title text-3xl sm:text-4xl text-white">Интерактивный Калькулятор Проекта</h2>
+                <p class="text-gray-400 text-sm">Выберите параметры и рассчитайте базовую стоимость в тенге (₸).</p>
+            </div>
+
+            <div class="space-y-6">
+                <!-- Base Service -->
+                <div class="space-y-3">
+                    <label class="text-sm font-semibold text-white">1. Выберите тип сайта или медиа:</label>
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                        <button type="button" onclick="selectCalcType('sales', 60000, this)" class="calc-btn p-4 rounded-2xl border-2 border-purple-500 bg-purple-500/20 text-white text-left transition-all">
+                            <div class="font-bold">Сайт для продаж</div>
+                            <div class="text-xs text-accent-custom">от 60 000 ₸</div>
+                        </button>
+                        <button type="button" onclick="selectCalcType('lessons', 50000, this)" class="calc-btn p-4 rounded-2xl border border-white/10 bg-white/5 text-gray-300 text-left hover:border-white/30 transition-all">
+                            <div class="font-bold">Сайт для уроков</div>
+                            <div class="text-xs text-gray-400">от 50 000 ₸</div>
+                        </button>
+                        <button type="button" onclick="selectCalcType('work', 70000, this)" class="calc-btn p-4 rounded-2xl border border-white/10 bg-white/5 text-gray-300 text-left hover:border-white/30 transition-all">
+                            <div class="font-bold">Сайт для работы</div>
+                            <div class="text-xs text-gray-400">от 70 000 ₸</div>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Addons -->
+                <div class="space-y-3">
+                    <label class="text-sm font-semibold text-white">2. Дополнительные опции:</label>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        <label class="flex items-center gap-3 p-4 rounded-2xl border border-white/10 bg-white/5 cursor-pointer hover:border-white/30">
+                            <input type="checkbox" onchange="updateCalcTotal()" id="opt-design" value="15000" class="accent-purple-500 w-4 h-4">
+                            <span class="text-sm font-medium text-gray-200">Авторский дизайн (+15 000 ₸)</span>
+                        </label>
+                        <label class="flex items-center gap-3 p-4 rounded-2xl border border-white/10 bg-white/5 cursor-pointer hover:border-white/30">
+                            <input type="checkbox" onchange="updateCalcTotal()" id="opt-ai" value="30000" class="accent-purple-500 w-4 h-4">
+                            <span class="text-sm font-medium text-gray-200">Создание ИИ-Видеоролика (+30 000 ₸)</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Price Disclaimer Note -->
+                <div class="p-4 rounded-2xl bg-amber-500/10 border border-amber-500/20 text-xs text-amber-300">
+                    <i class="fa-solid fa-triangle-exclamation mr-1"></i> **Примечание:** Окончательная цена обсуждается индивидуально. Вы всегда можете договориться о цене в зависимости от сложности и крупности проекта!
+                </div>
+
+                <!-- Total Output -->
+                <div class="pt-6 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-6">
+                    <div>
+                        <span class="text-xs text-gray-400 uppercase font-semibold block">Примерная базовая сумма:</span>
+                        <span id="calcResult" class="font-syne text-4xl font-extrabold text-white">60 000 ₸</span>
+                    </div>
+                    <button onclick="openModal('Заказ из калькулятора')" class="btn-accent px-8 py-4 rounded-full text-base font-bold w-full sm:w-auto">
+                        Обсудить проект с Исабеком
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER CTA SECTION -->
+    <footer class="hero-section text-white pt-20 pb-12 px-4 sm:px-8 relative overflow-hidden transition-all duration-500 z-10 border-t border-white/10">
+        <div class="max-w-4xl mx-auto text-center space-y-8">
+            <h2 class="font-serif-title text-4xl sm:text-6xl text-white">
+                Давайте создадим ваш проект вместе
+            </h2>
+            <p class="text-gray-300 text-lg max-w-xl mx-auto">
+                Свяжитесь с разработчиком **Исабеком Нұрасылом** прямо сейчас. Мы обсудим ваши задачи и договоримся о гибкой цене!
+            </p>
+            <div>
+                <button onclick="openModal('Финишная форма')" class="btn-accent px-10 py-5 rounded-full text-lg font-bold">
+                    Написать Исабеку →
+                </button>
+            </div>
+            
+            <div class="pt-16 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between text-xs text-gray-400 gap-4">
+                <span class="font-syne font-bold text-sm text-white">Исабек Нұрасыл ®</span>
+                <span>Создание сайтов, ИИ-видео и современного дизайна.</span>
+                <span>© 2026 Все права защищены.</span>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ORDER MODAL FORM -->
+    <div id="orderModal" class="fixed inset-0 bg-black/80 backdrop-blur-xl z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-[#0f1123] border border-white/20 text-white rounded-3xl max-w-lg w-full p-8 relative shadow-2xl space-y-6">
+            <button onclick="closeModal()" class="absolute top-6 right-6 text-gray-400 hover:text-white text-xl">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <div>
+                <span class="text-xs font-bold text-accent-custom uppercase tracking-wider font-orbitron block mb-1">Разработчик: Исабек Нұрасыл</span>
+                <h3 class="font-syne text-2xl font-bold text-white" id="modalTitle">Обсудить проект</h3>
+            </div>
+
+            <form id="orderForm" onsubmit="handleFormSubmit(event)" class="space-y-4">
+                <input type="hidden" id="selectedService" value="Заявка">
+
+                <div>
+                    <label class="block text-xs font-semibold text-gray-400 mb-1">ВАШЕ ИМЯ</label>
+                    <input type="text" required class="w-full bg-white/5 border border-white/10 rounded-xl p-3.5 text-white focus:outline-none focus:border-accent-custom text-sm" placeholder="Введите имя...">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-semibold text-gray-400 mb-1">TELEGRAM / WHATSAPP / ТЕЛЕФОН</label>
+                    <input type="text" required class="w-full bg-white/5 border border-white/10 rounded-xl p-3.5 text-white focus:outline-none focus:border-accent-custom text-sm" placeholder="@username или +7 (777)...">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-semibold text-gray-400 mb-1">ДЕТАЛИ И ЖЕЛАЕМАЯ ЦЕНА</label>
+                    <textarea rows="3" class="w-full bg-white/5 border border-white/10 rounded-xl p-3.5 text-white focus:outline-none focus:border-accent-custom text-sm" placeholder="Опишите ваши задачи и предпочтения по бюджету..."></textarea>
+                </div>
+
+                <button type="submit" class="btn-accent w-full py-4 rounded-xl text-base font-bold">
+                    Отправить Исабеку Нұрасылу
+                </button>
+            </form>
+
+            <div id="successMessage" class="hidden text-center py-8 space-y-3">
+                <div class="text-emerald-400 text-5xl"><i class="fa-solid fa-circle-check"></i></div>
+                <h4 class="font-syne text-2xl font-bold text-white">Спасибо! Заявка успешно отправлена.</h4>
+                <p class="text-gray-400 text-sm">Исабек Нұрасыл ответит вам в ближайшее время!</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        // Interactive Canvas Particle Starfield Effect
+        const canvas = document.getElementById('starfieldCanvas');
+        const ctx = canvas.getContext('2d');
+        let stars = [];
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            initStars();
+        }
+
+        function initStars() {
+            stars = [];
+            const count = Math.floor((canvas.width * canvas.height) / 8000);
+            for (let i = 0; i < count; i++) {
+                stars.push({
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height,
+                    radius: Math.random() * 1.5,
+                    alpha: Math.random(),
+                    speed: Math.random() * 0.01 + 0.005
+                });
+            }
+        }
+
+        function drawStars() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            stars.forEach(star => {
+                star.alpha += star.speed;
+                if (star.alpha > 1 || star.alpha < 0) {
+                    star.speed = -star.speed;
+                }
+                ctx.beginPath();
+                ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(255, 255, 255, ${Math.abs(star.alpha)})`;
+                ctx.fill();
+            });
+            requestAnimationFrame(drawStars);
+        }
+
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+        drawStars();
+
+        // Theme Change Handler
+        function changeTheme(themeName) {
+            document.documentElement.setAttribute('data-theme', themeName);
+        }
+
+        // Emerging Glow Reveal on Scroll
+        document.addEventListener('DOMContentLoaded', () => {
+            const glowElements = document.querySelectorAll('.glow-reveal');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.15 });
+
+            glowElements.forEach(el => observer.observe(el));
+        });
+
+        // Calculator Logic in Tenge (₸)
+        let basePrice = 60000;
+
+        function selectCalcType(type, price, btn) {
+            basePrice = price;
+            document.querySelectorAll('.calc-btn').forEach(b => {
+                b.className = "calc-btn p-4 rounded-2xl border border-white/10 bg-white/5 text-gray-300 text-left hover:border-white/30 transition-all";
+            });
+            btn.className = "calc-btn p-4 rounded-2xl border-2 border-purple-500 bg-purple-500/20 text-white text-left transition-all";
+            updateCalcTotal();
+        }
+
+        function updateCalcTotal() {
+            let total = basePrice;
+            const designOpt = document.getElementById('opt-design');
+            const aiOpt = document.getElementById('opt-ai');
+
+            if (designOpt.checked) total += parseInt(designOpt.value);
+            if (aiOpt.checked) total += parseInt(aiOpt.value);
+
+            document.getElementById('calcResult').innerText = total.toLocaleString('ru-RU') + ' ₸';
+        }
+
+        // Modal Controls
+        function openModal(serviceName) {
+            document.getElementById('modalTitle').innerText = 'Заказать: ' + serviceName;
+            document.getElementById('selectedService').value = serviceName;
+            document.getElementById('orderForm').classList.remove('hidden');
+            document.getElementById('successMessage').classList.add('hidden');
+            document.getElementById('orderModal').classList.remove('hidden');
+        }
+
+        function closeModal() {
+            document.getElementById('orderModal').classList.add('hidden');
+        }
+
+        function handleFormSubmit(e) {
+            e.preventDefault();
+            document.getElementById('orderForm').classList.add('hidden');
+            document.getElementById('successMessage').classList.remove('hidden');
+            setTimeout(() => {
+                closeModal();
+            }, 3000);
+        }
+    </script>
+</body>
+</html>
